@@ -3,6 +3,9 @@ import service.SimplePatternsTest;
 public class MainTest {
     public static void main(String[] args){
 //        SimplePatternsTest.serviceIdPatternTest();
-        SimplePatternsTest.questionPatternIdTest();
+//        SimplePatternsTest.questionPatternIdTest();
+        String testString = "d and some one else";
+        String testString2 = "D";
+        System.out.println(testString.matches("^[D,d]\\s.*"));
     }
 }
