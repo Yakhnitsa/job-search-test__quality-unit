@@ -18,9 +18,10 @@ public class StorageEntity {
     public StorageEntity() {
     }
 
-    public StorageEntity(String serviceId, String questionId, Date date, int waitingTime) {
+    public StorageEntity(String serviceId, String questionId, ResponseType responseType, Date date, int waitingTime) {
         this.serviceId = serviceId;
         this.questionId = questionId;
+        this.responseType = responseType;
         this.date = date;
         this.waitingTime = waitingTime;
     }

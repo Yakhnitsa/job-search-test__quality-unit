@@ -13,6 +13,17 @@ public class QueryEntity {
 
     private Date dateUntil;
 
+    public QueryEntity() {
+    }
+
+    public QueryEntity(String serviceId, String questionId, ResponseType responseType, Date dateFrom, Date dateUntil) {
+        this.serviceId = serviceId;
+        this.questionId = questionId;
+        this.responseType = responseType;
+        this.dateFrom = dateFrom;
+        this.dateUntil = dateUntil;
+    }
+
     public String getServiceId() {
         return serviceId;
     }

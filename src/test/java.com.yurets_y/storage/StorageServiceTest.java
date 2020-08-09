@@ -1,7 +1,10 @@
 package storage;
 
+import com.yurets_y.entity.QueryEntity;
+import com.yurets_y.entity.ResponseType;
 import com.yurets_y.entity.StorageEntity;
 import com.yurets_y.storage.StorageService;
+import com.yurets_y.storage.StorageServiceImpl;
 
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -11,54 +14,59 @@ import java.util.Date;
 import java.util.List;
 
 public class StorageServiceTest {
-    private static List<StorageEntity> testData = Arrays.asList(new StorageEntity[]{
-            new StorageEntity("10","2.12.1",new Date(),100),
-            new StorageEntity("10.1","3.5",new Date(),100),
-            new StorageEntity("9.5","5.16.4",new Date(),100),
-            new StorageEntity("10.3","1.2",new Date(),100),
-            new StorageEntity("1.1","6.7",new Date(),100),
-            new StorageEntity("2.2","10.3",new Date(),100),
-            new StorageEntity("2","1",new Date(),100),
-            new StorageEntity("2.3","15.6.5",new Date(),100),
-            new StorageEntity("4.2","4.5",new Date(),100),
-            new StorageEntity("4","5.1",new Date(),100),
-            new StorageEntity("1.1","8.5.1",new Date(),100),
-            new StorageEntity("10.1","10",new Date(),100),
-    });
+    private static final DateFormat df = new SimpleDateFormat("dd.MM.yyyy");
+
 
     public static void findByServiceIdTest(){
-        String searchId1 = "10";
-        String searchId2 = "10.2";
-        String searchId3 = "9.6";
-        findById(searchId2);
+
 
     }
 
     public static void main(String[] args) throws ParseException {
-        DateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy");
-        Date testDate = dateFormat.parse("10.02.2020");
-        Date dateFrom = dateFormat.parse("09.02.2020");
-        Date dateUntil = dateFormat.parse("10.03.2020");
-        Date nullDate = null;
-        System.out.println(dateValidator(testDate,dateFrom,nullDate));
-//        String testString = "10.2";
-//        System.out.println(testString.matches("10.1(\\.\\d)?(\\.\\d)?"));
-//        findByServiceIdTest();
+        storageServiceMatcherTest();
     }
 
-    public static void findById(String id){
-        String pattern = id + "(\\.\\d)?(\\.\\d)?";
-        testData.forEach(entity ->{
-            if(entity.getServiceId().matches(pattern)){
-                System.out.println(entity);
-            }
-//            else{
-//                System.out.println(entity.getServiceId() + " do not matches pattern " + pattern);
-//            }
+
+    private static List<StorageEntity> getTestData() throws ParseException {
+
+        ResponseType typeP = ResponseType.P;
+        ResponseType typeN = ResponseType.N;
+
+        return Arrays.asList(new StorageEntity[]{
+                new StorageEntity("10","2.12.1",typeP,df.parse("10.01.2020"),100),
+                new StorageEntity("10.1","3.5",typeP,df.parse("10.01.2020"),100),
+                new StorageEntity("9.5","5.16.4",typeP,df.parse("10.01.2020"),100),
+                new StorageEntity("10.3","1.2",typeP,df.parse("10.01.2020"),100),
+                new StorageEntity("1.1","6.7",typeP,df.parse("10.01.2020"),100),
+                new StorageEntity("2.2","10.3",typeP,df.parse("10.01.2020"),100),
+                new StorageEntity("2","1",typeP,df.parse("10.01.2020"),100),
+                new StorageEntity("2.3","15.6.5",typeP,df.parse("10.01.2020"),100),
+                new StorageEntity("4.2","4.5",typeP,df.parse("10.01.2020"),100),
+                new StorageEntity("4","5.1",typeP,df.parse("10.01.2020"),100),
+                new StorageEntity("1.1","8.5.1",typeP,df.parse("10.01.2020"),100),
+                new StorageEntity("10.1","2.12",typeP,df.parse("10.01.2020"),100),
         });
     }
-    static boolean dateValidator(Date testDate, Date dateFrom, Date dateUntil){
-        return  (!testDate.before (dateFrom) && (dateUntil == null || !testDate.after (dateUntil)));
+    private static QueryEntity getTestQueryEntity() throws ParseException {
+        ResponseType type = ResponseType.P;
+        String serviceId = "4.2";
+        String questionId = "5.1";
+        Date dateFrom = df.parse("01.01.2020");
+        Date dateUntil = df.parse("10.01.2020");
+        Date nullDate = null;
+        return new QueryEntity(serviceId,questionId,type,dateFrom,dateUntil);
+    }
+
+    private static void storageServiceMatcherTest() throws ParseException {
+        StorageServiceImpl storageService = new StorageServiceImpl();
+        List<StorageEntity> entities = getTestData();
+        QueryEntity queryEntity = getTestQueryEntity();
+        entities.forEach(entity ->{
+            if (storageService.isStorageEntityMatchesQueryEntity(entity, queryEntity)) {
+                System.out.println(entity);
+            }
+        });
+
     }
 }
 
