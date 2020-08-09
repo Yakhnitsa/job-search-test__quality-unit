@@ -4,5 +4,5 @@ import com.yurets_y.entity.QueryEntity;
 
 public interface QueryExtractor {
 
-    public QueryEntity getQuery(String query);
+    QueryEntity getQuery(String query);
 }

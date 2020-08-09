@@ -9,11 +9,11 @@ public class WaitingTimelineExtractorTest {
         WaitingTimelineExtractor extractor = new WaitingTimelineExtractorImpl();
         System.out.println("valid data test....");
         Arrays.asList(validData()).forEach(string ->{
-            System.out.println("\t" + extractor.getStorageEntity(string));
+            System.out.println("\t" + extractor.getWaitingTimelineEntity(string));
         });
         System.out.println("invalid data test....");
         Arrays.asList(invalidData()).forEach(string ->{
-            System.out.println("\t" + extractor.getStorageEntity(string));
+            System.out.println("\t" + extractor.getWaitingTimelineEntity(string));
         });
     }
 

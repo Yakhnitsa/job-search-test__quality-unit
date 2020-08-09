@@ -35,6 +35,7 @@ public class QueryExtractorImpl implements QueryExtractor {
         }catch (ParseException e){
             return null;
         }
+
         return new QueryEntity(serviceId,questionId,type,dateFrom,dateUntil);
     }
 

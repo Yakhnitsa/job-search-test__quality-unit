@@ -1,7 +1,7 @@
 package com.yurets_y.storage;
 
 import com.yurets_y.entity.QueryEntity;
-import com.yurets_y.entity.StorageEntity;
+import com.yurets_y.entity.WaitingTimelineEntity;
 
 import java.util.Date;
 import java.util.LinkedList;
@@ -10,32 +10,32 @@ import java.util.stream.Collectors;
 
 public class StorageServiceImpl implements StorageService{
 
-    private List<StorageEntity> storageEntities;
+    private List<WaitingTimelineEntity> storageEntities;
 
     public StorageServiceImpl() {
         storageEntities = new LinkedList<>();
     }
 
     @Override
-    public List<StorageEntity> findByQueryEntity(QueryEntity queryEntity) {
+    public List<WaitingTimelineEntity> findByQueryEntity(QueryEntity queryEntity) {
         return storageEntities.stream()
                 .filter(storageEntity -> isStorageEntityMatchesQueryEntity(storageEntity,queryEntity))
                 .collect(Collectors.toList());
     }
 
     @Override
-    public void save(StorageEntity entity) {
+    public void save(WaitingTimelineEntity entity) {
         storageEntities.add(entity);
     }
 
-    public boolean isStorageEntityMatchesQueryEntity(StorageEntity storageEntity, QueryEntity queryEntity){
+    public boolean isStorageEntityMatchesQueryEntity(WaitingTimelineEntity wtEntity, QueryEntity queryEntity){
 
 
-        if(!isIdMatches(storageEntity.getServiceId(),queryEntity.getServiceId())) return false;
-        if(!isIdMatches(storageEntity.getQuestionId(),queryEntity.getQuestionId())) return false;
-        if(storageEntity.getResponseType() != queryEntity.getResponseType()) return false;
+        if(!isIdMatches(wtEntity.getServiceId(),queryEntity.getServiceId())) return false;
+        if(!isIdMatches(wtEntity.getQuestionId(),queryEntity.getQuestionId())) return false;
+        if(wtEntity.getResponseType() != queryEntity.getResponseType()) return false;
 
-        return isDateMatchesPeriod(storageEntity.getDate(),queryEntity.getDateFrom(),queryEntity.getDateUntil());
+        return isDateMatchesPeriod(wtEntity.getDate(),queryEntity.getDateFrom(),queryEntity.getDateUntil());
     }
 
     private boolean isDateMatchesPeriod(Date testDate, Date dateFrom, Date dateUntil){

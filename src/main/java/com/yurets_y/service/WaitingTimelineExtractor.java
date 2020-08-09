@@ -1,7 +1,7 @@
 package com.yurets_y.service;
 
-import com.yurets_y.entity.StorageEntity;
+import com.yurets_y.entity.WaitingTimelineEntity;
 
 public interface WaitingTimelineExtractor {
-    StorageEntity getStorageEntity(String query);
+    WaitingTimelineEntity getWaitingTimelineEntity(String query);
 }

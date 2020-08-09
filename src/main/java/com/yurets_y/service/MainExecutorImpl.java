@@ -1,13 +1,10 @@
 package com.yurets_y.service;
 
 import com.yurets_y.entity.QueryEntity;
-import com.yurets_y.entity.StorageEntity;
+import com.yurets_y.entity.WaitingTimelineEntity;
 import com.yurets_y.storage.StorageService;
 
 import java.util.List;
-import java.util.Optional;
-import java.util.OptionalDouble;
-import java.util.stream.Collectors;
 
 public class MainExecutorImpl implements MainExecutor {
 
@@ -33,22 +30,22 @@ public class MainExecutorImpl implements MainExecutor {
         if(query.matches(queryPattern)){
             QueryEntity queryEntity = queryExtractor.getQuery(query);
             if(queryEntity != null){
-                List<StorageEntity> storageEntities = storage.findByQueryEntity(queryEntity);
-                return getStatisticData(storageEntities);
+                List<WaitingTimelineEntity> storageEntities = storage.findByQueryEntity(queryEntity);
+                return getAverageData(storageEntities);
             }
             return "";
         }
         else if(query.matches(wtPattern)){
-            StorageEntity storageEntity = wtExtractor.getStorageEntity(query);
-            if(storageEntity != null)
-                storage.save(storageEntity);
+            WaitingTimelineEntity wtEntity = wtExtractor.getWaitingTimelineEntity(query);
+            if(wtEntity != null)
+                storage.save(wtEntity);
         }
         return "";
     }
 
-    private String getStatisticData(List<StorageEntity> storageEntities){
+    private String getAverageData(List<WaitingTimelineEntity> storageEntities){
         Double average = storageEntities.stream()
-                .mapToLong(StorageEntity::getWaitingTime)
+                .mapToLong(WaitingTimelineEntity::getWaitingTime)
                 .average()
                 .orElse(-1);
 

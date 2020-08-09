@@ -1,7 +1,7 @@
 package com.yurets_y.service;
 
 import com.yurets_y.entity.ResponseType;
-import com.yurets_y.entity.StorageEntity;
+import com.yurets_y.entity.WaitingTimelineEntity;
 
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -16,10 +16,11 @@ public class WaitingTimelineExtractorImpl implements WaitingTimelineExtractor {
     private final DateFormat DATE_FORMAT = new SimpleDateFormat("dd.MM.yyyy");
 
     @Override
-    public StorageEntity getStorageEntity(String query) {
+    public WaitingTimelineEntity getWaitingTimelineEntity(String query) {
         if(!testQuery(query)) return  null;
         String[] params = query.split(" ");
         if(params.length != 6) return null;
+
         String serviceId = params[1];
         String questionId = params[2];
         ResponseType type = ResponseType.valueOf(params[3]);
@@ -32,7 +33,7 @@ public class WaitingTimelineExtractorImpl implements WaitingTimelineExtractor {
         } catch (ParseException e) {
             return null;
         }
-        return new StorageEntity(serviceId,questionId,type,date,time);
+        return new WaitingTimelineEntity(serviceId,questionId,type,date,time);
     }
 
     private boolean testQuery(String query){

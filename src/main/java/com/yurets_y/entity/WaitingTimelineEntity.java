@@ -3,7 +3,7 @@ package com.yurets_y.entity;
 import java.util.Date;
 import java.util.Objects;
 
-public class StorageEntity {
+public class WaitingTimelineEntity {
 
     private String serviceId;
 
@@ -15,10 +15,10 @@ public class StorageEntity {
 
     private int waitingTime;
 
-    public StorageEntity() {
+    public WaitingTimelineEntity() {
     }
 
-    public StorageEntity(String serviceId, String questionId, ResponseType responseType, Date date, int waitingTime) {
+    public WaitingTimelineEntity(String serviceId, String questionId, ResponseType responseType, Date date, int waitingTime) {
         this.serviceId = serviceId;
         this.questionId = questionId;
         this.responseType = responseType;
@@ -30,7 +30,7 @@ public class StorageEntity {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        StorageEntity that = (StorageEntity) o;
+        WaitingTimelineEntity that = (WaitingTimelineEntity) o;
         return Objects.equals(serviceId, that.serviceId) &&
                 Objects.equals(questionId, that.questionId) &&
                 responseType == that.responseType &&
@@ -85,7 +85,7 @@ public class StorageEntity {
 
     @Override
     public String toString() {
-        return "StorageEntity{" +
+        return "WaitingTimelineEntity{" +
                 "serviceId='" + serviceId + '\'' +
                 ", questionId='" + questionId + '\'' +
                 ", responseType=" + responseType +

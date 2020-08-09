@@ -1,14 +1,14 @@
 package com.yurets_y.storage;
 
 import com.yurets_y.entity.QueryEntity;
-import com.yurets_y.entity.StorageEntity;
+import com.yurets_y.entity.WaitingTimelineEntity;
 
 import java.util.List;
 
 public interface StorageService {
 
-    List<StorageEntity> findByQueryEntity(QueryEntity queryEntity);
+    List<WaitingTimelineEntity> findByQueryEntity(QueryEntity queryEntity);
 
-    void save(StorageEntity entity);
+    void save(WaitingTimelineEntity entity);
 
 }
