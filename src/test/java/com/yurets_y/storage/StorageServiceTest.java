@@ -1,4 +1,4 @@
-package storage;
+package com.yurets_y.storage;
 
 import com.yurets_y.entity.QueryEntity;
 import com.yurets_y.entity.ResponseType;
@@ -25,6 +25,17 @@ public class StorageServiceTest {
     public static void main(String[] args) throws ParseException {
         storageServiceMatcherTest();
     }
+    private static void storageServiceMatcherTest() throws ParseException {
+        StorageServiceImpl storageService = new StorageServiceImpl();
+        List<StorageEntity> entities = getTestData();
+        QueryEntity queryEntity = getTestQueryEntity();
+        entities.forEach(entity ->{
+            if (storageService.isStorageEntityMatchesQueryEntity(entity, queryEntity)) {
+                System.out.println(entity);
+            }
+        });
+
+    }
 
 
     private static List<StorageEntity> getTestData() throws ParseException {
@@ -48,25 +59,17 @@ public class StorageServiceTest {
         });
     }
     private static QueryEntity getTestQueryEntity() throws ParseException {
+
+        String serviceId = "1";
+        String questionId = "*";
         ResponseType type = ResponseType.P;
-        String serviceId = "4.2";
-        String questionId = "5.1";
         Date dateFrom = df.parse("01.01.2020");
         Date dateUntil = df.parse("10.01.2020");
+
         Date nullDate = null;
         return new QueryEntity(serviceId,questionId,type,dateFrom,dateUntil);
     }
 
-    private static void storageServiceMatcherTest() throws ParseException {
-        StorageServiceImpl storageService = new StorageServiceImpl();
-        List<StorageEntity> entities = getTestData();
-        QueryEntity queryEntity = getTestQueryEntity();
-        entities.forEach(entity ->{
-            if (storageService.isStorageEntityMatchesQueryEntity(entity, queryEntity)) {
-                System.out.println(entity);
-            }
-        });
 
-    }
 }
 

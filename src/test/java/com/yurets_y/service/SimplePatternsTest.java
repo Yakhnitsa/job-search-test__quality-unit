@@ -1,9 +1,22 @@
-package service;
+package com.yurets_y.service;
 
+import com.yurets_y.entity.ResponseType;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.regex.Pattern;
 
 public class SimplePatternsTest {
+    public static void main(String[] args) throws ParseException {
+        String testString = "2020.07.01";
+        String DATE_PATTERN = "\\d{1,2}\\.\\d{1,2}\\.\\d{2,4}";
+        System.out.println(testString.matches(DATE_PATTERN));
+
+//        String pattern = "[P,p,N,n]";
+//        System.out.println(testString.matches(pattern));
+    }
 
 
     public static void serviceIdPatternTest(){

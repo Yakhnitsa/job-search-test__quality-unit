@@ -1,4 +1,6 @@
-import service.SimplePatternsTest;
+package com.yurets_y;
+
+
 
 public class MainTest {
     public static void main(String[] args){

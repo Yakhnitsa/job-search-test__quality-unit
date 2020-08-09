@@ -6,6 +6,7 @@ import com.yurets_y.entity.StorageEntity;
 import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class StorageServiceImpl implements StorageService{
 
@@ -17,24 +18,21 @@ public class StorageServiceImpl implements StorageService{
 
     @Override
     public List<StorageEntity> findByQueryEntity(QueryEntity queryEntity) {
-
-        return null;
+        return storageEntities.stream()
+                .filter(storageEntity -> isStorageEntityMatchesQueryEntity(storageEntity,queryEntity))
+                .collect(Collectors.toList());
     }
-
-
 
     @Override
     public void save(StorageEntity entity) {
-
+        storageEntities.add(entity);
     }
 
     public boolean isStorageEntityMatchesQueryEntity(StorageEntity storageEntity, QueryEntity queryEntity){
-        String optionalIndexPattern = "(\\.\\d)?(\\.\\d)?";
-        String serviceIdPattern = queryEntity.getServiceId() + optionalIndexPattern;
-        String questionIdPattern = queryEntity.getQuestionId() + optionalIndexPattern;
 
-        if(!storageEntity.getServiceId().matches(serviceIdPattern)) return false;
-        if(!storageEntity.getQuestionId().matches(questionIdPattern)) return false;
+
+        if(!isIdMatches(storageEntity.getServiceId(),queryEntity.getServiceId())) return false;
+        if(!isIdMatches(storageEntity.getQuestionId(),queryEntity.getQuestionId())) return false;
         if(storageEntity.getResponseType() != queryEntity.getResponseType()) return false;
 
         return isDateMatchesPeriod(storageEntity.getDate(),queryEntity.getDateFrom(),queryEntity.getDateUntil());
@@ -43,5 +41,11 @@ public class StorageServiceImpl implements StorageService{
     private boolean isDateMatchesPeriod(Date testDate, Date dateFrom, Date dateUntil){
         if(dateFrom == null) return false;
         return  (!testDate.before (dateFrom) && (dateUntil == null || !testDate.after (dateUntil)));
+    }
+
+    private boolean isIdMatches(String storageEntityId, String queryId){
+        if(queryId.matches("\\*")) return true;
+        String serviceIdPattern = queryId + "(\\.\\d+)?(\\.\\d+)?";
+        return storageEntityId.matches(serviceIdPattern);
     }
 }
