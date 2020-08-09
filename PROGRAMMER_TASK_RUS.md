@@ -18,7 +18,10 @@
         category_id - (*опционально) - 1-20
         sub-category_id - (*опционально) - 1-5
         
-        
+### 'D' Данные по запросу
+   `D service_id[.variation_id] question_type_id[.category_id.[sub-category_id]] P/N date_from[-date_to]`        
+   `service_id[.variation_id] question_type_id[.category_id.[sub-category_id]]` - те же правила, что и для данных ожидания
+   `date_from[-date_to]` - диапазон дат, от и до (*опционально) ()
        
         
 ### Пример (и разбор примера)

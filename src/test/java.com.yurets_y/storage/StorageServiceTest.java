@@ -3,6 +3,9 @@ package storage;
 import com.yurets_y.entity.StorageEntity;
 import com.yurets_y.storage.StorageService;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
@@ -31,10 +34,16 @@ public class StorageServiceTest {
 
     }
 
-    public static void main(String[] args){
+    public static void main(String[] args) throws ParseException {
+        DateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy");
+        Date testDate = dateFormat.parse("10.02.2020");
+        Date dateFrom = dateFormat.parse("09.02.2020");
+        Date dateUntil = dateFormat.parse("10.03.2020");
+        Date nullDate = null;
+        System.out.println(dateValidator(testDate,dateFrom,nullDate));
 //        String testString = "10.2";
 //        System.out.println(testString.matches("10.1(\\.\\d)?(\\.\\d)?"));
-        findByServiceIdTest();
+//        findByServiceIdTest();
     }
 
     public static void findById(String id){
@@ -47,6 +56,9 @@ public class StorageServiceTest {
 //                System.out.println(entity.getServiceId() + " do not matches pattern " + pattern);
 //            }
         });
+    }
+    static boolean dateValidator(Date testDate, Date dateFrom, Date dateUntil){
+        return  (!testDate.before (dateFrom) && (dateUntil == null || !testDate.after (dateUntil)));
     }
 }
 

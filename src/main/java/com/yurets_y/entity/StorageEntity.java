@@ -9,6 +9,8 @@ public class StorageEntity {
 
     private String questionId;
 
+    private ResponseType responseType;
+
     private Date date;
 
     private int waitingTime;
@@ -29,13 +31,15 @@ public class StorageEntity {
         if (o == null || getClass() != o.getClass()) return false;
         StorageEntity that = (StorageEntity) o;
         return Objects.equals(serviceId, that.serviceId) &&
-                Objects.equals(questionId, that.questionId);
+                Objects.equals(questionId, that.questionId) &&
+                responseType == that.responseType &&
+                Objects.equals(date, that.date);
     }
 
     @Override
     public int hashCode() {
 
-        return Objects.hash(serviceId, questionId);
+        return Objects.hash(serviceId, questionId, responseType, date);
     }
 
     public String getServiceId() {
@@ -70,11 +74,20 @@ public class StorageEntity {
         this.waitingTime = waitingTime;
     }
 
+    public ResponseType getResponseType() {
+        return responseType;
+    }
+
+    public void setResponseType(ResponseType responseType) {
+        this.responseType = responseType;
+    }
+
     @Override
     public String toString() {
         return "StorageEntity{" +
                 "serviceId='" + serviceId + '\'' +
                 ", questionId='" + questionId + '\'' +
+                ", responseType=" + responseType +
                 ", date=" + date +
                 ", waitingTime=" + waitingTime +
                 '}';
