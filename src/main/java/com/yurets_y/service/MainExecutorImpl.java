@@ -5,11 +5,13 @@ import com.yurets_y.entity.StorageEntity;
 import com.yurets_y.storage.StorageService;
 
 import java.util.List;
+import java.util.Optional;
+import java.util.OptionalDouble;
 import java.util.stream.Collectors;
 
 public class MainExecutorImpl implements MainExecutor {
 
-    private final String LINE_SEPARATOR;
+    private final String LINE_SEPARATOR = System.lineSeparator();
 
     private QueryExtractor queryExtractor;
 
@@ -18,7 +20,6 @@ public class MainExecutorImpl implements MainExecutor {
     private StorageService storage;
 
     public MainExecutorImpl(QueryExtractor queryExtractor, WaitingTimelineExtractor wtExtractor, StorageService storage) {
-        this.LINE_SEPARATOR = System.lineSeparator();
         this.queryExtractor = queryExtractor;
         this.wtExtractor = wtExtractor;
         this.storage = storage;
@@ -46,10 +47,12 @@ public class MainExecutorImpl implements MainExecutor {
     }
 
     private String getStatisticData(List<StorageEntity> storageEntities){
-        if(storageEntities.isEmpty()) return "-" + LINE_SEPARATOR;
-        Long waitingTime = storageEntities.stream()
+        Double average = storageEntities.stream()
                 .mapToLong(StorageEntity::getWaitingTime)
-                .sum();
-        return Math.round(waitingTime/storageEntities.size()) + LINE_SEPARATOR;
+                .average()
+                .orElse(-1);
+
+        return average == -1 ? "-" + LINE_SEPARATOR
+            :Math.round(average) + LINE_SEPARATOR;
     }
 }
