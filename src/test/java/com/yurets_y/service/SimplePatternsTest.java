@@ -10,9 +10,13 @@ import java.util.regex.Pattern;
 
 public class SimplePatternsTest {
     public static void main(String[] args) throws ParseException {
-        String testString = "2020.07.01";
-        String DATE_PATTERN = "\\d{1,2}\\.\\d{1,2}\\.\\d{2,4}";
-        System.out.println(testString.matches(DATE_PATTERN));
+//        String testString = "2020.07.01";
+//        String DATE_PATTERN = "\\d{1,2}\\.\\d{1,2}\\.\\d{2,4}";
+//        System.out.println(testString.matches(DATE_PATTERN));
+        queryPatternTest();
+//        String SERVICE_ID_PATTERN = "\\*|([1-9]|10)(\\.[1-3])?";
+//        String testString = "10.2";
+//        System.out.println(testString.matches(SERVICE_ID_PATTERN));
 
 //        String pattern = "[P,p,N,n]";
 //        System.out.println(testString.matches(pattern));
@@ -61,5 +65,19 @@ public class SimplePatternsTest {
         Arrays.asList(invalidTestStrings).forEach( string -> {
             System.out.println(string.matches(pattern));
         });
+    }
+    private static void queryPatternTest(){
+        String SERVICE_ID_PATTERN = "(\\*|([1-9]|10)(\\.[1-3])?)";
+        String QUESTION_ID_PATTERN = "\\*|([1-9]|10)(\\.([1-9]|(1\\d)|20))?(\\.[1-5])?";
+        String TYPE_PATTERN = "[P,N]";
+        String DATE_PATTERN = "\\d{1,2}\\.\\d{1,2}\\.\\d{2,4}";
+        String pattern = "D\\s" + SERVICE_ID_PATTERN ;
+//                + "\\s" + DATE_PATTERN + "(-" + DATE_PATTERN + ")?";
+
+        String query = "D 10.1";
+//        System.out.println(pattern);
+
+        System.out.println(query.matches(pattern));
+
     }
 }

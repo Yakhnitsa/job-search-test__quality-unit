@@ -5,6 +5,7 @@ import com.yurets_y.entity.StorageEntity;
 import com.yurets_y.storage.StorageService;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class MainExecutorImpl implements MainExecutor {
 
@@ -25,8 +26,8 @@ public class MainExecutorImpl implements MainExecutor {
 
     @Override
     public String executeQuery(String query) {
-        String queryPattern = "^[D,d]\\s.*";
-        String wtPattern = "^[C,c]\\s.*";
+        String queryPattern = "^D\\s.*";
+        String wtPattern = "^C\\s.*";
 
         if(query.matches(queryPattern)){
             QueryEntity queryEntity = queryExtractor.getQuery(query);
@@ -45,7 +46,10 @@ public class MainExecutorImpl implements MainExecutor {
     }
 
     private String getStatisticData(List<StorageEntity> storageEntities){
-
-        return "-";
+        if(storageEntities.isEmpty()) return "-" + LINE_SEPARATOR;
+        Long waitingTime = storageEntities.stream()
+                .mapToLong(StorageEntity::getWaitingTime)
+                .sum();
+        return Math.round(waitingTime/storageEntities.size()) + LINE_SEPARATOR;
     }
 }

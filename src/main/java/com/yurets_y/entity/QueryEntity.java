@@ -1,6 +1,7 @@
 package com.yurets_y.entity;
 
 import java.util.Date;
+import java.util.Objects;
 
 public class QueryEntity {
     private String serviceId;
@@ -62,5 +63,34 @@ public class QueryEntity {
 
     public void setDateUntil(Date dateUntil) {
         this.dateUntil = dateUntil;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        QueryEntity that = (QueryEntity) o;
+        return Objects.equals(serviceId, that.serviceId) &&
+                Objects.equals(questionId, that.questionId) &&
+                responseType == that.responseType &&
+                Objects.equals(dateFrom, that.dateFrom) &&
+                Objects.equals(dateUntil, that.dateUntil);
+    }
+
+    @Override
+    public int hashCode() {
+
+        return Objects.hash(serviceId, questionId, responseType, dateFrom, dateUntil);
+    }
+
+    @Override
+    public String toString() {
+        return "QueryEntity{" +
+                "serviceId='" + serviceId + '\'' +
+                ", questionId='" + questionId + '\'' +
+                ", responseType=" + responseType +
+                ", dateFrom=" + dateFrom +
+                ", dateUntil=" + dateUntil +
+                '}';
     }
 }
