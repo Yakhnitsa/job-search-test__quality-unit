@@ -1,12 +1,7 @@
-package com.yurets_y.service;
-
-import com.yurets_y.entity.ResponseType;
+package com.yurets_y.application.service;
 
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Arrays;
-import java.util.Date;
-import java.util.regex.Pattern;
 
 public class SimplePatternsTest {
     public static void main(String[] args) throws ParseException {

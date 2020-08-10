@@ -1,8 +1,8 @@
-package com.yurets_y.service;
+package com.yurets_y.application.service;
 
-import com.yurets_y.entity.QueryEntity;
-import com.yurets_y.entity.WaitingTimelineEntity;
-import com.yurets_y.storage.StorageService;
+import com.yurets_y.application.entity.WaitingTimelineEntity;
+import com.yurets_y.application.storage.StorageService;
+import com.yurets_y.application.entity.QueryEntity;
 
 import java.util.List;
 

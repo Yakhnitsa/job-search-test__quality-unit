@@ -1,7 +1,7 @@
-package com.yurets_y.storage;
+package com.yurets_y.application.storage;
 
-import com.yurets_y.entity.QueryEntity;
-import com.yurets_y.entity.WaitingTimelineEntity;
+import com.yurets_y.application.entity.QueryEntity;
+import com.yurets_y.application.entity.WaitingTimelineEntity;
 
 import java.util.Date;
 import java.util.LinkedList;

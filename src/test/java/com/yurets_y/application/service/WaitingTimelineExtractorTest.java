@@ -1,4 +1,4 @@
-package com.yurets_y.service;
+package com.yurets_y.application.service;
 
 
 import java.util.Arrays;

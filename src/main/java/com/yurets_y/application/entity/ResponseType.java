@@ -1,4 +1,4 @@
-package com.yurets_y.entity;
+package com.yurets_y.application.entity;
 
 public enum ResponseType {
     P,

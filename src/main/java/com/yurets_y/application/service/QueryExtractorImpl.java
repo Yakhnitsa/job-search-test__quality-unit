@@ -1,7 +1,7 @@
-package com.yurets_y.service;
+package com.yurets_y.application.service;
 
-import com.yurets_y.entity.QueryEntity;
-import com.yurets_y.entity.ResponseType;
+import com.yurets_y.application.entity.ResponseType;
+import com.yurets_y.application.entity.QueryEntity;
 
 import java.text.DateFormat;
 import java.text.ParseException;

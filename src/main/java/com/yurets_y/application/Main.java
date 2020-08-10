@@ -1,11 +1,8 @@
-package com.yurets_y;
+package com.yurets_y.application;
 
-import com.yurets_y.service.*;
-import com.yurets_y.storage.StorageService;
-import com.yurets_y.storage.StorageServiceImpl;
-
-import java.text.ParseException;
-import java.util.Arrays;
+import com.yurets_y.application.service.*;
+import com.yurets_y.application.storage.StorageService;
+import com.yurets_y.application.storage.StorageServiceImpl;
 
 public class Main {
 
@@ -19,7 +16,7 @@ public class Main {
     }
 
     private static void splitAndExecute(String arg){
-        String lineSeparator = System.lineSeparator();
+        String lineSeparator = "(\\r\\n)|(\\n)";
         String[] args = arg.split(lineSeparator);
         execute(args);
     }
